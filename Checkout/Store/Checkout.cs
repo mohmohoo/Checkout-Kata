@@ -8,18 +8,14 @@ namespace Checkout.Store
         : ICheckout
     {
         private readonly IPricing _pricing;
-        private readonly Dictionary<string, Func<int, int>> _pricings;
-        private readonly Dictionary<string, int> _lineItems;
+        private readonly List<LineItem> _lineItems;
 
         public Checkout(IPricing pricing)
         {
             _pricing = pricing ?? throw new ArgumentException("Invalid null value", "pricing");
-
-            _pricings = new Dictionary<string, Func<int, int>>();
-            _lineItems = new Dictionary<string, int>();
         }
 
-        public int GetTotalPrice() => _lineItems.Sum(lineItem => _pricings[lineItem.Key](lineItem.Value));
+        public int GetTotalPrice() => _lineItems.Sum(lineItem => lineItem.GetPriceFunc());
 
         public void Scan(string item)
         {
@@ -36,8 +32,21 @@ namespace Checkout.Store
                 {
                     throw new ArgumentException("Invalid item", "item");
                 }
+                
+                _lineItems.Add(new LineItem(itemCount => sku.GetPrice(new ItemCount(itemCount))));
+            }
+        }
 
-                _pricings.Add(item, itemCount => sku.GetPrice(new ItemCount(itemCount)));
+        private class LineItem
+        {
+            public string Item { get; set; }
+            public int Count { get; set; }
+
+            public Func<int> GetPriceFunc { get; }
+
+            public LineItem(Func<int, int> getPriceFunc)
+            {
+                GetPriceFunc = () => getPriceFunc(Count);
             }
         }
     }
