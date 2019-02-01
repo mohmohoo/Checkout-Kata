@@ -6,6 +6,6 @@ namespace Checkout
     {
         ReadOnlyCollection<ISku> AvailableSkus { get; }
 
-        ISku GetSku(string item);
+        bool TryGetSku(string item, out ISku sku);
     }
 }

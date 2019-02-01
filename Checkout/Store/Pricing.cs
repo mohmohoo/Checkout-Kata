@@ -24,7 +24,7 @@ namespace Checkout.Store
             AvailableSkus = skus.ToList().AsReadOnly();
         }
 
-        public ISku GetSku(string item)
+        public bool TryGetSku(string item, out ISku sku)
         {
             throw new System.NotImplementedException();
         }
