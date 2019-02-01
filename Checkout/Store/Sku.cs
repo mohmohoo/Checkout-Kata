@@ -11,7 +11,7 @@ namespace Checkout.Store
 
         public Sku(char name, int unitPrice)
         {
-            if (Regex.IsMatch(name.ToString(), "[a-z]", RegexOptions.IgnoreCase))
+            if (name == '\0' || !Regex.IsMatch(name.ToString(), "[a-z]", RegexOptions.IgnoreCase))
             {
                 throw new ArgumentException("Sku name is not a valid alphabet character", "name");
             }

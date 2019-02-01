@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Checkout.Store;
+using NUnit.Framework;
+using System;
 
 namespace Checkout.Tests
 {
@@ -6,8 +8,13 @@ namespace Checkout.Tests
     public class SkuTests
     {
         [Test]
-        public void TestMethod1()
+        [TestCase(null, 100)]
+        [TestCase('1', 100)]
+        [TestCase('#', 50)]
+        [TestCase('\0', 50)]
+        public void InvalidInput_ThrowException(char name, int unitPrice)
         {
+            Assert.Throws<ArgumentException>(() => new Sku(name, unitPrice));
         }
     }
 }
