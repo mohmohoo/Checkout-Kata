@@ -32,9 +32,8 @@ namespace Checkout.Store
                     throw new ArgumentException("Invalid item", "item");
                 }
 
-                var newLineItem = new LineItem(itemCount => sku.GetPrice(new ItemCount(itemCount)))
+                var newLineItem = new LineItem(item, itemCount => sku.GetPrice(new ItemCount(itemCount)))
                 {
-                    Item = item,
                     ItemCount = 0
                 };
                 _lineItems.Add(newLineItem);
@@ -43,14 +42,15 @@ namespace Checkout.Store
 
         private class LineItem
         {
-            public string Item { get; set; }
+            public string Item { get; }
             public int ItemCount { get; set; }
 
             public Func<int> GetPriceFunc { get; }
 
-            public LineItem(Func<int, int> getPriceFunc)
+            public LineItem(string item, Func<int, int> getPriceFunc)
             {
                 GetPriceFunc = () => getPriceFunc(ItemCount);
+                Item = item;
             }
         }
     }
