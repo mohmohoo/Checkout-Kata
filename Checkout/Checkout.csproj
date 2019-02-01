@@ -49,6 +49,7 @@
     <Compile Include="IItemCount.cs" />
     <Compile Include="IPricing.cs" />
     <Compile Include="IValueHolder.cs" />
+    <Compile Include="Store\Checkout.cs" />
     <Compile Include="Store\DiscountedSku.cs" />
     <Compile Include="Store\ItemCount.cs" />
     <Compile Include="ISku.cs" />
