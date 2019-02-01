@@ -6,6 +6,6 @@ namespace Checkout
     {
         ReadOnlyCollection<ISku> AvailableSkus { get; }
 
-        int GetPrice(ICheckoutLineItem lineItem);
+        ISku GetSku(string item);
     }
 }
