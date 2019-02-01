@@ -16,6 +16,11 @@ namespace Checkout.Store
                 throw new ArgumentException("Invalid sku item in the sku list", "skus");
             }
 
+            if (skus.GroupBy(s => s.Name).Select(group => group.Count()).Any(count => count > 1))
+            {
+                throw new ArgumentException("Invalid duplicate name in the sku list", "skus");
+            }
+
             AvailableSkus = skus.ToList().AsReadOnly();
         }
 
