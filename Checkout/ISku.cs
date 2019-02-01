@@ -1,9 +1,8 @@
-﻿using Checkout.Store;
-
-namespace Checkout
+﻿namespace Checkout
 {
     public interface ISku
     {
+        char Name { get; }
         int GetPrice(IItemCount items);
     }
 }

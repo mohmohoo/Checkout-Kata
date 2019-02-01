@@ -5,8 +5,10 @@ namespace Checkout.Store
 {
     public class Sku : ISku
     {
-        private readonly char _name;
         private readonly int _unitPrice;
+
+        public char Name { get; }
+
         public Sku(char name, int unitPrice)
         {
             if (Regex.IsMatch(name.ToString(), "[a-z]", RegexOptions.IgnoreCase))
@@ -19,7 +21,7 @@ namespace Checkout.Store
                 throw new ArgumentException("Unit price is not valid value", "unitPrice");
             }
 
-            _name = name;
+            Name = name;
             _unitPrice = unitPrice;
         }
 

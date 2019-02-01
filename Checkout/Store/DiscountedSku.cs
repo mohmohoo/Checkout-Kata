@@ -8,6 +8,11 @@ namespace Checkout.Store
         private readonly int _speicalPrice;
         private readonly Sku _sku;
 
+        public char Name
+        {
+            get => _sku.Name;
+        }
+
         public DiscountedSku(Sku sku, int specialPriceItemCount, int specialPrice)
         {
             _sku = sku ?? throw new ArgumentException("Discounted sku cannot be null");
