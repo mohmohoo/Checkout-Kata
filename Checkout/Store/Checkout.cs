@@ -9,7 +9,7 @@ namespace Checkout.Store
 
         public Checkout(IPricing pricing)
         {
-            _pricing = pricing;
+            _pricing = pricing ?? throw new ArgumentException("Invalid null value", "pricing");
         }
 
         public int GetTotalPrice()
