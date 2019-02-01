@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICheckout.cs" />
+    <Compile Include="ICheckoutLineItem.cs" />
     <Compile Include="IItemCount.cs" />
     <Compile Include="IPricing.cs" />
     <Compile Include="IValueHolder.cs" />

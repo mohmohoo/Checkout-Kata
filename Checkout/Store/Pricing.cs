@@ -24,7 +24,7 @@ namespace Checkout.Store
             AvailableSkus = skus.ToList().AsReadOnly();
         }
 
-        public int GetPrice(int itemCount)
+        public int GetPrice(ICheckoutLineItem lineItem)
         {
             throw new System.NotImplementedException();
         }
