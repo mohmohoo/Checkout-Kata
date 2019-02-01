@@ -57,6 +57,7 @@ namespace Checkout.Tests
 
             Assert.True(target.TryGetSku("A", out ISku aSku));
             Assert.True(target.TryGetSku("B", out ISku bSku));
+            Assert.False(target.TryGetSku("C", out ISku cSku));
 
             Assert.True(aSku.Name == 'A');
             Assert.True(bSku.Name == 'B');
