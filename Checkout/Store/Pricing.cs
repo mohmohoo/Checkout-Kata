@@ -26,7 +26,9 @@ namespace Checkout.Store
 
         public bool TryGetSku(string item, out ISku sku)
         {
-            throw new System.NotImplementedException();
+            sku = AvailableSkus.SingleOrDefault(s => 
+                (item ?? "").Equals(s.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            return sku != null;
         }
     }
 }
