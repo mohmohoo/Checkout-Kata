@@ -9,7 +9,7 @@ namespace Checkout.Store
 
         public ItemCount(int value)
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 throw new ArgumentException("Invalid item count value", "value");
             }

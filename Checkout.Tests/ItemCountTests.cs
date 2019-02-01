@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Checkout.Store;
+using NUnit.Framework;
+using System;
 
 namespace Checkout.Tests
 {
-    class ItemCountTests
+    [TestFixture]
+    public class ItemCountTests
     {
+        [Test]
+        [TestCase(-1)]
+        [TestCase(-2)]
+        [TestCase(0)]
+        public void InvalidTests_ThrowException(int value)
+        {
+            Assert.Throws<ArgumentException>(() => new ItemCount(value));
+        }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void ValidTests(int value)
+        {
+            var target = new ItemCount(value);
+            Assert.AreEqual(target.Value, value);
+        }
     }
 }
