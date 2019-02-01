@@ -17,6 +17,11 @@ namespace Checkout.Store
         {
             _sku = sku ?? throw new ArgumentException("Discounted sku cannot be null");
 
+            if (specialPrice < sku.UnitPrice)
+            {
+                throw new ArgumentException("Special price cannot be less than unit price");
+            }
+
             _specialPriceItemCount = specialPriceItemCount > 0 
                 ? specialPriceItemCount 
                 : throw new ArgumentException("Special price sku count is not valid", "specialPriceItemCount");

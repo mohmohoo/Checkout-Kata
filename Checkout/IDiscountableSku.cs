@@ -3,5 +3,6 @@
     public interface IDiscountableSku
         : ISku
     {
+        int UnitPrice { get; }
     }
 }

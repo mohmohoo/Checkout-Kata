@@ -5,9 +5,9 @@ namespace Checkout.Store
 {
     public class Sku : IDiscountableSku
     {
-        private readonly int _unitPrice;
-
         public char Name { get; }
+
+        public int UnitPrice { get; }
 
         public Sku(char name, int unitPrice)
         {
@@ -22,9 +22,9 @@ namespace Checkout.Store
             }
 
             Name = name;
-            _unitPrice = unitPrice;
+            UnitPrice = unitPrice;
         }
 
-        public int GetPrice(IItemCount items) => items.Value * _unitPrice;
+        public int GetPrice(IItemCount items) => items.Value * UnitPrice;
     }
 }
