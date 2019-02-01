@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Checkout.Store
 {
-    public class Sku : ISku
+    public class Sku : IDiscountableSku
     {
         private readonly int _unitPrice;
 
