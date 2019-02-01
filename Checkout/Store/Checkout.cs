@@ -34,7 +34,7 @@ namespace Checkout.Store
 
                 var newLineItem = new LineItem(item, itemCount => sku.GetPrice(new ItemCount(itemCount)))
                 {
-                    ItemCount = 0
+                    ItemCount = 1
                 };
                 _lineItems.Add(newLineItem);
             }
