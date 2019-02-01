@@ -21,7 +21,7 @@ namespace Checkout.Store
                 : throw new ArgumentException("Special price is not valid", "specialPrice");
         }
 
-        public int GetPrice(ItemCount items)
+        public int GetPrice(IItemCount items)
         {
             var skuPrice = 0;
             var unitPriceItemCount = items.Value % _specialPriceItemCount; 

@@ -4,6 +4,6 @@ namespace Checkout
 {
     public interface ISku
     {
-        int GetPrice(ItemCount items);
+        int GetPrice(IItemCount items);
     }
 }

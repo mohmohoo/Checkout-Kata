@@ -46,8 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICheckout.cs" />
-    <Compile Include="IStore.cs" />
+    <Compile Include="IItemCount.cs" />
+    <Compile Include="IPricing.cs" />
+    <Compile Include="IValueHolder.cs" />
+    <Compile Include="Store\DiscountedSku.cs" />
+    <Compile Include="Store\ItemCount.cs" />
+    <Compile Include="ISku.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Store\Sku.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

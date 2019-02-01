@@ -3,7 +3,7 @@
 namespace Checkout.Store
 {
     public class ItemCount
-        : IValueHolder<int>
+        : IItemCount
     {
         public int Value { get; }
 

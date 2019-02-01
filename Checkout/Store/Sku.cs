@@ -23,6 +23,6 @@ namespace Checkout.Store
             _unitPrice = unitPrice;
         }
 
-        public int GetPrice(ItemCount items) => items.Value * _unitPrice;
+        public int GetPrice(IItemCount items) => items.Value * _unitPrice;
     }
 }
