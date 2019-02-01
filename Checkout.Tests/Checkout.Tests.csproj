@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="CheckoutTests.cs" />
     <Compile Include="DiscountedSkuTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
     <Compile Include="ItemCountTests.cs" />
     <Compile Include="PricingTests.cs" />
     <Compile Include="SkuTests.cs" />
