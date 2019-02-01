@@ -2,10 +2,6 @@
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Checkout.Tests
 {
@@ -19,13 +15,18 @@ namespace Checkout.Tests
         }
 
         [Test]
-        [TestCase(0, 100)]
-        [TestCase(3, 0)]
-        [TestCase(-1, 100)]
-        [TestCase(3, -5)]
-        public void InvalidInputs_ThrowException(int specialPriceItemCount, int specialPrice)
+        [TestCase(0, 100, 10)]
+        [TestCase(3, 0, -5)]
+        [TestCase(-1, 100, 10)]
+        [TestCase(3, -5, -7)]
+        [TestCase(3, 100, 101)]
+        public void InvalidInputs_ThrowException(int specialPriceItemCount, int specialPrice, int unitPrice)
         {
-            Assert.Throws<ArgumentException>(() => new DiscountedSku(null, specialPriceItemCount, specialPrice));
+            var skuMock = new Mock<IDiscountableSku>();
+            skuMock.Setup(x => x.Name).Returns('A');
+            skuMock.Setup(x => x.UnitPrice).Returns(unitPrice);
+
+            Assert.Throws<ArgumentException>(() => new DiscountedSku(skuMock.Object, specialPriceItemCount, specialPrice));
         }
 
         [Test]
@@ -52,6 +53,7 @@ namespace Checkout.Tests
 
             var skuMock = new Mock<IDiscountableSku>();
             skuMock.Setup(x => x.Name).Returns(name);
+            skuMock.Setup(x => x.UnitPrice).Returns(unitPrice);
             skuMock.Setup(x => x.GetPrice(It.IsAny<IItemCount>())).Returns((itemCount % specialPriceItemCount) * unitPrice);
             var target = new DiscountedSku(skuMock.Object, specialPriceItemCount, specialPrice);
 
