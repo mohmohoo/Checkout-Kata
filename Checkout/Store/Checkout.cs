@@ -13,18 +13,17 @@ namespace Checkout.Store
         public Checkout(IPricing pricing)
         {
             _pricing = pricing ?? throw new ArgumentException("Invalid null value", "pricing");
+            _lineItems = new List<LineItem>();
         }
 
         public int GetTotalPrice() => _lineItems.Sum(lineItem => lineItem.GetPriceFunc());
 
         public void Scan(string item)
         {
-            var lineItems = new Dictionary<string, int>();
-            
-
-            if (lineItems.ContainsKey(item))
+            var lineItem = _lineItems.SingleOrDefault(l => l.Item.Equals(item, StringComparison.InvariantCultureIgnoreCase));
+            if (lineItem != null)
             {
-                lineItems[item] += 1;
+                lineItem.ItemCount += 1;
             }
             else
             {
@@ -32,21 +31,26 @@ namespace Checkout.Store
                 {
                     throw new ArgumentException("Invalid item", "item");
                 }
-                
-                _lineItems.Add(new LineItem(itemCount => sku.GetPrice(new ItemCount(itemCount))));
+
+                var newLineItem = new LineItem(itemCount => sku.GetPrice(new ItemCount(itemCount)))
+                {
+                    Item = item,
+                    ItemCount = 0
+                };
+                _lineItems.Add(newLineItem);
             }
         }
 
         private class LineItem
         {
             public string Item { get; set; }
-            public int Count { get; set; }
+            public int ItemCount { get; set; }
 
             public Func<int> GetPriceFunc { get; }
 
             public LineItem(Func<int, int> getPriceFunc)
             {
-                GetPriceFunc = () => getPriceFunc(Count);
+                GetPriceFunc = () => getPriceFunc(ItemCount);
             }
         }
     }
